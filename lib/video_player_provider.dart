@@ -20,9 +20,15 @@ class VideoPlayerProvider extends ChangeNotifier {
     try {
       await Future.delayed(const Duration(seconds: 3));
       videosList = MockData.videosList;
-      loading = false;
-      await cacheImage(videosList.first.thumbnailUrl);
-      createReelsController(videosList.first.videoUrl);
+      if (videosList.isNotEmpty) {
+        loading = false;
+        await cacheImage(videosList.first.thumbnailUrl);
+        if (videosList.length > 1) {
+          await cacheImage(videosList[1].thumbnailUrl);
+          cacheController.preCache(initDataSource(videosList[1].videoUrl));
+        }
+        createReelsController(videosList.first.videoUrl);
+      }
     } catch (e) {
       rethrow;
     }

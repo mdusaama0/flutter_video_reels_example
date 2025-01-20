@@ -1,7 +1,6 @@
 import 'package:better_player/better_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_video_reels_example/mock_data.dart';
 import 'package:flutter_video_reels_example/video_player_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -37,9 +36,7 @@ class VideoReelsScreen extends StatelessWidget {
                           child: CachedNetworkImage(
                             height: 9 / 16,
                             fit: BoxFit.cover,
-                            imageUrl: MockData
-                                .videosList[provider.currentReelIndex]
-                                .thumbnailUrl,
+                            imageUrl: provider.videosList[index].thumbnailUrl,
                             placeholder: (context, url) => const SizedBox(),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
@@ -80,9 +77,8 @@ class VideoReelsScreen extends StatelessWidget {
                               child: CachedNetworkImage(
                                 height: 600,
                                 fit: BoxFit.cover,
-                                imageUrl: MockData
-                                    .videosList[provider.currentReelIndex]
-                                    .thumbnailUrl,
+                                imageUrl:
+                                    provider.videosList[index].thumbnailUrl,
                                 placeholder: (context, url) => const SizedBox(),
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
